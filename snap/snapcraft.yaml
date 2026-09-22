@@ -1,0 +1,64 @@
+name: victoriametrics-riscv64
+base: core24
+version: '1.152.0'
+
+summary: VictoriaMetrics time series database
+description: |
+  VictoriaMetrics is a fast, cost-effective and scalable time series
+  database and monitoring solution.
+
+  This snap contains the VictoriaMetrics single-node database server
+  built for RISC-V 64.
+
+license: Apache-2.0
+website: https://victoriametrics.com/
+
+platforms:
+  riscv64:
+    build-on:
+      - arm64
+    build-for:
+      - riscv64
+
+grade: stable
+confinement: strict
+
+apps:
+  victoriametrics:
+    command: bin/victoria-metrics
+    daemon: simple
+    restart-condition: always
+    plugs:
+      - network
+      - network-bind
+
+parts:
+  victoriametrics:
+    plugin: nil
+
+    source: https://github.com/VictoriaMetrics/VictoriaMetrics.git
+    source-tag: v1.152.0
+
+    build-snaps:
+      - go/1.27/stable
+
+    override-build: |
+      set -eux
+
+      cd "$CRAFT_PART_SRC"
+
+      export GOOS=linux
+      export GOARCH=riscv64
+      export CGO_ENABLED=0
+
+      mkdir -p "$CRAFT_PART_INSTALL/bin"
+
+      go build \
+        -mod=vendor \
+        -trimpath \
+        -ldflags "-X github.com/VictoriaMetrics/VictoriaMetrics/lib/buildinfo.Version=v1.152.0" \
+        -o "$CRAFT_PART_INSTALL/bin/victoria-metrics" \
+        ./app/victoria-metrics
+
+    stage:
+      - bin/victoria-metrics

@@ -1,5 +1,5 @@
-name: victoriametrics-riscv64
-base: core24
+name: victoriametrics-riscv64-core26
+base: core26
 version: '1.152.0'
 
 summary: VictoriaMetrics time series database

@@ -1,52 +1,34 @@
-VictoriaMetrics RISC-V64 Snap
+# VictoriaMetrics RISC-V64 Snap
 
-A Snap package of VictoriaMetrics Single-node built specifically for 64-bit RISC-V (riscv64) systems.
+Snap packaging for [VictoriaMetrics](https://github.com/VictoriaMetrics/VictoriaMetrics) Single-node for 64-bit RISC-V (`riscv64`) systems.
 
-This project provides an easy way to deploy VictoriaMetrics on RISC-V64 Linux devices and servers using the Snap package format.
+This repository provides Snap packaging configurations for building VictoriaMetrics for the `linux/riscv64` architecture from the official upstream source.
 
-About
+## Builds
 
-The package is based on the official VictoriaMetrics v1.152.0 source code and is built for the linux/riscv64 architecture.
+Two Snap base variants are maintained:
 
-The build is performed using Snapcraft and Launchpad remote builds. The official VictoriaMetrics source is downloaded automatically during the build process, so the upstream source code is not included in this repository.
+| Branch | Snap base | VictoriaMetrics |
+|---|---|---|
+| `core24` | Ubuntu Core 24 | v1.152.0 |
+| `core26` | Ubuntu Core 26 | v1.152.0 |
 
-Target platform
+## Details
 
-* Architecture: RISC-V 64-bit (riscv64)
-* Operating system: Linux
-* VictoriaMetrics: v1.152.0
-* Snap base: Ubuntu Core 24 (core24)
-* Snap confinement: Strict
+- **Architecture:** RISC-V 64-bit (`riscv64`)
+- **Operating system:** Linux
+- **Package:** VictoriaMetrics Single-node
+- **Version:** v1.152.0
+- **Snap confinement:** Strict
 
-Why this project?
+The VictoriaMetrics source code is downloaded directly from the official upstream repository during the build and is not included in this repository.
 
-Official pre-built VictoriaMetrics packages are primarily distributed for commonly used architectures such as AMD64 and ARM64. This project provides a Snap packaging solution specifically for RISC-V64, making VictoriaMetrics easier to deploy on RISC-V hardware.
+## Upstream
 
-It can be useful for:
+[VictoriaMetrics](https://github.com/VictoriaMetrics/VictoriaMetrics)
 
-* RISC-V single-board computers
-* RISC-V development platforms
-* RISC-V servers
-* IoT and edge systems
-* Monitoring and time-series data collection on RISC-V infrastructure
+This repository contains only the Snap packaging and build configuration for RISC-V64.
 
-Build
+## License
 
-The package can be built remotely for RISC-V64 using Snapcraft:
-
-snapcraft remote-build --build-for=riscv64
-
-The resulting package is:
-
-victoriametrics-riscv64_1.152.0_riscv64.snap
-
-Repository
-
-This repository contains only the Snap packaging configuration and documentation. The VictoriaMetrics source code remains in the official upstream repository.
-
-Upstream project: VictoriaMetrics
-Upstream source: https://github.com/VictoriaMetrics/VictoriaMetrics
-
-License
-
-VictoriaMetrics is licensed under the Apache License 2.0.
+Apache License 2.0

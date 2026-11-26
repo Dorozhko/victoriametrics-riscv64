@@ -48,12 +48,27 @@ parts:
     source: https://github.com/VictoriaMetrics/VictoriaMetrics.git
     source-tag: v1.157.0
 
-    build-snaps:
-      - go/1.27/stable
+    build-packages:
+      - ca-certificates
+      - curl
 
     override-build: |
       set -eux
       cd "$CRAFT_PART_SRC"
+
+      echo "=== Installing Go 1.27.4 ==="
+
+      GO_ARCHIVE="go1.27.4.linux-amd64.tar.gz"
+      GO_SHA256="7226736c2339719cda28fbf3a54d71aa63bcefe376e98cef00034268dab24840"
+
+      curl -fL "https://go.dev/dl/${GO_ARCHIVE}" -o "$CRAFT_PART_BUILD/$GO_ARCHIVE"
+
+      echo "$GO_SHA256  $CRAFT_PART_BUILD/$GO_ARCHIVE" | sha256sum -c -
+
+      tar -C "$CRAFT_PART_BUILD" -xzf "$CRAFT_PART_BUILD/$GO_ARCHIVE"
+
+      export GOROOT="$CRAFT_PART_BUILD/go"
+      export PATH="$GOROOT/bin:$PATH"
 
       go version
       go version | grep -q 'go1.27.4'

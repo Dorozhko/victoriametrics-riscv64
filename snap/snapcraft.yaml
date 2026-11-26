@@ -56,6 +56,7 @@ parts:
       cd "$CRAFT_PART_SRC"
 
       go version
+      go version | grep -q 'go1.27.4'
 
       export GOOS=linux
       export GOARCH=riscv64

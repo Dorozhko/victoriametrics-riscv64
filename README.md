@@ -10,8 +10,7 @@ Two Snap base variants are maintained:
 
 | Branch | Snap base | VictoriaMetrics |
 |---|---|---|
-| `core24` | Ubuntu Core 24 | v1.152.0 |
-| `core26` | Ubuntu Core 26 | v1.152.0 |
+| `core24` | Ubuntu Core 24 | v1.157.0 |
 
 ## Details
 
